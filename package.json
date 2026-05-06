@@ -10,14 +10,6 @@
     "build": "npm run build -w frontend && npm run build -w backend"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.10",
     "concurrently": "^8.0.0"
-  },
-  "dependencies": {
-    "@nestjs/jwt": "^11.0.2",
-    "@prisma/client": "^7.8.0",
-    "axios": "^1.16.0",
-    "jsonwebtoken": "^9.0.3",
-    "prisma": "^7.8.0"
   }
 }
