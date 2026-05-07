@@ -1,15 +1,16 @@
 {
   "name": "mailpilot",
   "private": true,
+  "version": "1.0.0",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
-    "build": "npm run build -w frontend && npm run build -w backend"
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "backend": "npm run dev --workspace=backend",
+    "frontend": "npm run dev --workspace=frontend"
   },
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "concurrently": "^9.2.1"
   }
 }
