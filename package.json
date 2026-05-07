@@ -1,23 +1,16 @@
 {
   "name": "mailpilot",
   "private": true,
+  "version": "1.0.0",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev -w frontend\" \"npm run start:dev -w backend\"",
-    "build": "npm run build -w frontend && npm run build -w backend"
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "backend": "npm run dev --workspace=backend",
+    "frontend": "npm run dev --workspace=frontend"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.10",
-    "concurrently": "^8.0.0"
-  },
-  "dependencies": {
-    "@nestjs/jwt": "^11.0.2",
-    "@prisma/client": "^7.8.0",
-    "axios": "^1.16.0",
-    "jsonwebtoken": "^9.0.3",
-    "prisma": "^7.8.0"
+    "concurrently": "^9.2.1"
   }
 }
