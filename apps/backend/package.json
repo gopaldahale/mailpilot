@@ -13,7 +13,8 @@
     "build": "nest build",
     "start": "node dist/main",
     "start:dev": "nest start --watch",
-    "dev": "nest start --watch"
+    "dev": "nest start --watch",
+    "start:prod": "node dist/src/main"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
