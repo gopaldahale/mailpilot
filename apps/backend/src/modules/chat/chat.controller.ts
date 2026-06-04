@@ -4,15 +4,14 @@ import { ChatService } from './chat.service.js';
 
 @Controller('chat')
 export class ChatController {
-  constructor(private readonly chatService: ChatService) {}
+  constructor(private readonly chatService: ChatService) { }
 
   @Post()
-async chat(
-  @Body('prompt') prompt: string,
-  @Headers('authorization') authHeader: string,
-) {
-  const accessToken = authHeader.replace('Bearer ', '');
+  async chat(
+    @Body('prompt') prompt: string,
+    @Body('userId') userId: string,
+  ) {
 
-  return this.chatService.chat(prompt, accessToken);
-}
+    return this.chatService.chat(prompt, userId);
+  }
 }

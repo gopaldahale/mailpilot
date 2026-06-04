@@ -8,10 +8,10 @@ export class ChatService {
         private readonly geminiService: GeminiService,
         private readonly emailService: EmailService,) { }
 
-    async chat(prompt: string, accessToken: string) {
-        const emails = await this.emailService.getEmails(accessToken);
+    async chat(prompt: string, userId: string) {
+        const emails = await this.emailService.getEmails(userId);
 
-        const emailContext = JSON.stringify(emails.value);
+        const emailContext = JSON.stringify(emails.slice(0, 5));
 
         const finalPrompt = `
     User Request:
