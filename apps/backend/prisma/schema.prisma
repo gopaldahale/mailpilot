@@ -3,6 +3,30 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+
+  tokens OAuthToken[]
+}
+
+model OAuthToken {
+  id       String @id @default(uuid())
+  userId   String
+  provider String
+
+  accessToken  String
+  refreshToken String
+  expiresAt    DateTime
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, provider])
 }

@@ -1,14 +1,13 @@
-import { Controller,Get,Headers } from '@nestjs/common';
-import {EmailService} from './email.service.js'
+import { Controller, Get, Param } from '@nestjs/common';
+import { EmailService } from './email.service.js'
 
-@Controller('email')
+@Controller('emails')
 export class EmailController {
-    constructor(private readonly emailService:EmailService){}
+    constructor(private readonly emailService: EmailService) { }
 
-    @Get()
-    async getEmails(@Headers('authorization') authHeader: string) {
-        const accessToken = authHeader.replace('Bearer ', '');
+    @Get(':userId')
+    async getEmails(@Param('userId') userId: string) {
 
-        return this.emailService.getEmails(accessToken)
+        return this.emailService.getEmails(userId)
     }
 }
