@@ -8,6 +8,10 @@ import { Global, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
+  // Global API Prefix
+  app.setGlobalPrefix('api');
+
   // Security header 
   app.use(helmet())
 
