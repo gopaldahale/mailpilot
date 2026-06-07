@@ -1,10 +1,8 @@
-import { useState } from "react";
 
 import Sidebar from "../components/Sidebar";
 import ChatInput from "../components/ChatInput";
 import ChatMessage from "../components/ChatMessage";
 
-import type { Message } from "../types/chat";
 
 import { addMessage, setLoading } from "../features/chat/chatSlice";
 
