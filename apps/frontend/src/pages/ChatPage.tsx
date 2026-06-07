@@ -25,7 +25,7 @@ export default function ChatPage() {
         dispatch(setLoading(true));
 
         try {
-            const data = await sendMessage(message, "5f8e9c8f-6996-4179-96c1-dd05b76d3588",);
+            const data = await sendMessage(message);
 
             dispatch(addMessage({ role: "assistant", message: data.reply, }),
             );

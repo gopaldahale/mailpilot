@@ -22,7 +22,7 @@ export class AuthController {
   //   return { profile, tokens };
   // }
   @Get('callback')
-  async callback(@Query('code') code: string) {
+  async callback(@Query('code') code: string, @Res() res: Response,) {
     // console.log('Received code:', code);
 
     try {
@@ -43,12 +43,27 @@ export class AuthController {
         tokens.expires_in,
       );
 
+      const jwt = await this.authService.generateJwt(user);
+
       // return { profile, tokens };
-      return {
-        message: 'Login successful',
-        user
-      };
-      
+      // return {
+      //   message: 'Login successful',
+      //   user
+      // };
+      // return {
+      //   token: jwt,
+      //   user
+      // };
+      res.cookie("access_token", jwt, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+      });
+
+      return res.redirect(
+        `${process.env.FRONTEND_URL}/chat`,
+      );
+
     } catch (error: any) {
       // console.log('ERROR RESPONSE:');
       // console.log(error.response?.data);

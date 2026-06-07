@@ -2,10 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { decrypt, encrypt } from '../../common/utils/encryption.util.js'
 import { PrismaService } from '../../prisma/prisma.service.js';
 import axios from 'axios';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService,) { }
 
   // Build Microsoft auth URL  
   getMicrosoftAuthUrl() {
@@ -125,6 +128,18 @@ export class AuthService {
 
     return accessToken
 
+  }
+
+  async generateJwt(user: any) {
+    const payload = {
+      sub: user.id,
+      email: user.email,
+    };
+
+    return this.jwtService.signAsync(payload);
+  }
+  verifyJwt(token: string) {
+    return this.jwtService.verify(token);
   }
 }
 
